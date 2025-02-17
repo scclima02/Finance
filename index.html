@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calcule juros compostos e simule suas metas financeiras com nossas ferramentas gratuitas. Aprenda como investir melhor e alcançar seus objetivos financeiros.">
+  <meta name="keywords" content="calculadora de juros compostos, simulador de metas financeiras, investimentos, finanças pessoais">
+  <meta name="author" content="Seu Nome">
+  <title>Calculadora de Juros Compostos e Simulador de Metas Financeiras</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div class="container">
+      <h1>Finanças Inteligentes</h1>
+      <p>Planeje seu futuro com nossas ferramentas de cálculo financeiro</p>
+      <nav>
+        <ul>
+          <li><a href="#calculadora">Calculadora de Juros Compostos</a></li>
+          <li><a href="#simulador">Simulador de Metas Financeiras</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Seção da Calculadora de Juros Compostos -->
+  <section id="calculadora" class="section">
+    <div class="container">
+      <h2>Calculadora de Juros Compostos</h2>
+      <p>Insira os valores abaixo para calcular o montante final e os juros acumulados.</p>
+      <div class="calculator">
+        <div class="input-group">
+          <input type="number" id="capital" placeholder="Capital Inicial (R$)" required>
+          <input type="number" id="taxa" placeholder="Taxa de Juros (% ao mês)" required>
+        </div>
+        <div class="input-group">
+          <input type="number" id="tempo" placeholder="Tempo (meses)" required>
+        </div>
+        <button onclick="calcularJuros()">Calcular</button>
+        <div class="resultado-box" id="resultadoJuros"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção do Simulador de Metas Financeiras -->
+  <section id="simulador" class="section">
+    <div class="container">
+      <h2>Simulador de Metas Financeiras</h2>
+      <p>Insira sua meta financeira e descubra quanto precisa investir mensalmente para alcançá-la.</p>
+      <div class="calculator">
+        <div class="input-group">
+          <input type="number" id="meta" placeholder="Meta Financeira (R$)" required>
+          <input type="number" id="taxaMeta" placeholder="Taxa de Juros (% ao mês)" required>
+        </div>
+        <div class="input-group">
+          <input type="number" id="tempoMeta" placeholder="Tempo (meses)" required>
+        </div>
+        <button onclick="calcularMeta()">Calcular</button>
+        <div class="resultado-box" id="resultadoMeta"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="section">
+    <div class="container">
+      <h2>Sobre</h2>
+      <p>
+        Bem-vindo ao <strong>Finanças Inteligentes</strong>, seu ponto de partida para tomar decisões financeiras mais conscientes e estratégicas. Criamos este site com o objetivo de democratizar o acesso a ferramentas práticas e educativas que ajudam pessoas como você a planejar melhor o futuro e alcançar seus objetivos financeiros.
+      </p>
+      <p>
+        No mundo de hoje, entender conceitos como juros compostos, investimentos e metas financeiras é essencial para construir uma base sólida de prosperidade. No entanto, muitas pessoas ainda enfrentam dificuldades para aplicar esses princípios no dia a dia. É aqui que entramos: com nossas calculadoras intuitivas e recursos interativos, queremos simplificar o processo de planejamento financeiro, tornando-o acessível a todos.
+      </p>
+      <p>
+        Nosso compromisso vai além de fornecer ferramentas. Acreditamos que a educação financeira é o primeiro passo para a independência econômica. Por isso, estamos constantemente buscando inovar e expandir nossos recursos para atender às necessidades de nossos usuários. Seja você um investidor iniciante ou alguém que deseja organizar suas finanças pessoais, estamos aqui para apoiá-lo em cada etapa dessa jornada.
+      </p>
+      <p>
+        Explore nossas ferramentas, calcule seus investimentos e descubra o poder dos juros compostos. Com o <strong>Finanças Inteligentes</strong>, você está no controle do seu futuro financeiro. Junte-se a nós e dê o primeiro passo rumo à realização dos seus sonhos!
+      </p>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Finanças Inteligentes. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Função para calcular juros compostos
+    function calcularJuros() {
+      const capital = parseFloat(document.getElementById('capital').value);
+      const taxa = parseFloat(document.getElementById('taxa').value) / 100;
+      const tempo = parseInt(document.getElementById('tempo').value);
+
+      if (isNaN(capital) || isNaN(taxa) || isNaN(tempo)) {
+        document.getElementById('resultadoJuros').innerHTML = '<p class="error">Por favor, preencha todos os campos.</p>';
+        return;
+      }
+
+      const montante = capital * Math.pow(1 + taxa, tempo);
+      const juros = montante - capital;
+
+      document.getElementById('resultadoJuros').innerHTML = `
+        <div class="resultado-content">
+          <p>Montante Final: <strong>R$ ${montante.toFixed(2)}</strong></p>
+          <p>Juros Acumulados: <strong>R$ ${juros.toFixed(2)}</strong></p>
+        </div>
+      `;
+    }
+
+    // Função para calcular metas financeiras
+    function calcularMeta() {
+      const meta = parseFloat(document.getElementById('meta').value);
+      const taxaMeta = parseFloat(document.getElementById('taxaMeta').value) / 100;
+      const tempoMeta = parseInt(document.getElementById('tempoMeta').value);
+
+      if (isNaN(meta) || isNaN(taxaMeta) || isNaN(tempoMeta)) {
+        document.getElementById('resultadoMeta').innerHTML = '<p class="error">Por favor, preencha todos os campos.</p>';
+        return;
+      }
+
+      const taxaMensal = Math.pow(1 + taxaMeta, 1 / 12) - 1;
+      const investimentoMensal = meta * taxaMensal / (Math.pow(1 + taxaMensal, tempoMeta) - 1);
+
+      document.getElementById('resultadoMeta').innerHTML = `
+        <div class="resultado-content">
+          <p>Investimento Mensal Necessário: <strong>R$ ${investimentoMensal.toFixed(2)}</strong></p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
